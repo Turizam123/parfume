@@ -16,19 +16,17 @@
     }}}
   </script>
   <style>
-    /* ---------- Luxe additions (only for HEADER + HERO) ---------- */
-    :root{
-      --gold:#d4af37;
-      --gold-soft:rgba(212,175,55,.18);
-    }
+    :root{ --gold:#d4af37; --gold-soft:rgba(212,175,55,.18); }
+    /* gold text effect */
     .gold-foil{
       background: linear-gradient(92deg,#caa94a 0%,#f7e7b0 23%,#a27f1d 45%,#f0d986 60%,#b18f2c 78%,#f7e7b0 100%);
       -webkit-background-clip:text;background-clip:text;color:transparent;
       filter: drop-shadow(0 6px 24px rgba(212,175,55,.15));
     }
+    /* framed hero */
     .hero-frame{
-      position:relative;border-radius:2rem;
-      background: radial-gradient(120% 140% at 50% -10%, rgba(255,255,255,.06) 0%, rgba(255,255,255,0) 45%) ,
+      position:relative;border-radius:1.25rem; /* tighter on mobile */
+      background: radial-gradient(120% 140% at 50% -10%, rgba(255,255,255,.06) 0%, rgba(255,255,255,0) 45%),
                   linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.2));
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 10px 50px rgba(0,0,0,.35);
       overflow:hidden;
@@ -41,150 +39,153 @@
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0 .06 .12 .06 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       mix-blend-mode:soft-light;opacity:.55;
     }
-    .sparkles{
-      position:absolute;inset:0;pointer-events:none;overflow:hidden;
+    .sparkles{position:absolute;inset:0;pointer-events:none;overflow:hidden;
       background:
         radial-gradient(2px 2px at 14% 22%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 100%),
         radial-gradient(1.5px 1.5px at 72% 18%, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 100%),
         radial-gradient(1.8px 1.8px at 32% 78%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 100%),
         radial-gradient(1.6px 1.6px at 84% 64%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 100%),
         radial-gradient(1.4px 1.4px at 10% 70%, rgba(255,255,255,.65) 0%, rgba(255,255,255,0) 100%);
-      animation: twinkle 6s ease-in-out infinite;
-      opacity:.55;
+      animation: twinkle 6s ease-in-out infinite; opacity:.45;
     }
-    @keyframes twinkle{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-    .shine{ position:relative;overflow:hidden; }
+    @keyframes twinkle{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    .shine{position:relative;overflow:hidden;}
     .shine::after{
       content:"";position:absolute;top:-120%;left:-30%;width:60%;height:300%;
       background: linear-gradient(120deg, rgba(255,255,255,0) 35%, rgba(255,255,255,.25) 50%, rgba(255,255,255,0) 65%);
       transform: skewX(-12deg);filter: blur(1px);
     }
-    .shine:hover::after{animation:shine 1.2s ease;}
-    @keyframes shine{ from{transform:translateX(-120%) skewX(-12deg);} to{transform:translateX(220%) skewX(-12deg);} }
-    .hero-gold-edge{
-      position:absolute;inset:auto 4% -1px;height:1px;
+    .shine:hover::after{animation:shine 1.1s ease;}
+    @keyframes shine{from{transform:translateX(-120%) skewX(-12deg);}to{transform:translateX(220%) skewX(-12deg);}}
+    .hero-gold-edge{position:absolute;inset:auto 4% -1px;height:1px;
       background: linear-gradient(90deg, transparent, rgba(212,175,55,.65), transparent);
       filter: drop-shadow(0 0 18px rgba(212,175,55,.45));
     }
-    .auraline{
-      position:absolute;left:50%;bottom:-48px;translate:-50% 0;width:82%;
+    .auraline{position:absolute;left:50%;bottom:-48px;translate:-50% 0;width:82%;
       height:120px;background: radial-gradient(60% 100% at 50% 0%, rgba(212,175,55,.22), transparent 70%);
       filter: blur(22px);pointer-events:none;
     }
     .hero-parallax{transform:translate3d(0,0,0);will-change:transform;transition: transform .25s ease-out;}
 
-    /* -------- Rounded promo art with feather blending -------- */
-    .promo-art{
-      position:relative;border-radius:24px;overflow:hidden;background:#0a0a0a;
-      box-shadow: 0 20px 60px rgba(0,0,0,.45);
-      outline:1px solid rgba(255,255,255,.06);
-      height:100%;
-      display:flex;align-items:center;justify-content:center;
+    /* rounded promo art */
+    .promo-art{position:relative;border-radius:16px;overflow:hidden;background:#0a0a0a;
+      box-shadow: 0 20px 60px rgba(0,0,0,.45); outline:1px solid rgba(255,255,255,.06);
+      height:100%;display:flex;align-items:center;justify-content:center;
     }
     .promo-art img{display:block;width:100%;height:100%;object-fit:cover;}
-    .promo-art .caption{
-      position:absolute;left:0;right:0;bottom:14px;text-align:center;
-      color:#d4af37;font-weight:500;letter-spacing:.2px;
-      text-shadow:0 2px 12px rgba(0,0,0,.6);
-    }
+    .promo-art .caption{position:absolute;left:0;right:0;bottom:10px;text-align:center;color:#d4af37;font-weight:500;letter-spacing:.2px;text-shadow:0 2px 12px rgba(0,0,0,.6);}
     @supports (-webkit-mask-image: linear-gradient(#000,#000)) {
-      .promo-art.feather > img{
-        -webkit-mask-image: radial-gradient(140% 120% at 50% 50%, #000 70%, rgba(0,0,0,0) 100%);
-                mask-image: radial-gradient(140% 120% at 50% 50%, #000 70%, rgba(0,0,0,0) 100%);
-      }
+      .promo-art.feather>img{-webkit-mask-image: radial-gradient(140% 120% at 50% 50%, #000 70%, rgba(0,0,0,0) 100%);mask-image: radial-gradient(140% 120% at 50% 50%, #000 70%, rgba(0,0,0,0) 100%);}
     }
 
-    /* ---------- Existing project styles kept ---------- */
+    /* product media */
     .img-full{width:100%;height:auto;object-fit:contain}
-    .popup-bg{background-color:rgba(0,0,0,0.7)}
-    .fade-in{opacity:0;transform:translateY(10px);animation:fadeIn .9s ease-out .2s forwards}
-    @keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
-    .badge{position:absolute;top:.75rem;left:.75rem}
-
-    .card{border-radius:1.5rem;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    .media-luxe{position:relative;height:240px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.18));cursor:zoom-in;}
+    .media-luxe{position:relative;height:220px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.18));}
     @media(min-width:768px){.media-luxe{height:270px}}
     .media-luxe img{position:absolute;inset:0;margin:auto;max-height:100%;max-width:100%;object-fit:contain;display:block;filter:drop-shadow(0 12px 28px rgba(0,0,0,.45)) saturate(1.02) contrast(1.02);transition:transform .25s ease, filter .25s ease;transform:scale(1);transform-origin:50% 50%;will-change:transform;}
-    .media-luxe.zooming{cursor:zoom-out}
-    .media-luxe.zooming img{filter:drop-shadow(0 14px 30px rgba(0,0,0,.5)) saturate(1.06) contrast(1.06)}
-    .media-luxe::after{content:"";position:absolute;inset:0;pointer-events:none;background:
-        radial-gradient(80% 50% at 50% -10%, rgba(255,255,255,.35) 0%, rgba(255,255,255,0) 55%),
-        linear-gradient(to bottom, rgba(0,0,0,0) 65%, rgba(0,0,0,.28) 100%);
+    /* disable hover zoom on touch devices to avoid accidental zoom */
+    @media (hover:hover) and (pointer:fine){
+      .media-luxe{cursor:zoom-in;}
+      .media-luxe.zooming{cursor:zoom-out}
+      .media-luxe.zooming img{filter:drop-shadow(0 14px 30px rgba(0,0,0,.5)) saturate(1.06) contrast(1.06)}
     }
-    .media-luxe::before{content:"";position:absolute;top:-20%;left:-30%;width:60%;height:160%;background:linear-gradient(120deg, rgba(255,255,255,0) 10%, rgba(255,255,255,.22) 40%, rgba(255,255,255,0) 70%);transform:skewX(-18deg);opacity:.55;filter:blur(2px);pointer-events:none;transition:transform .8s ease, opacity .8s ease;}
-    article.card:hover .media-luxe::before{transform:translateX(40%) skewX(-18deg);opacity:.75}
 
-    .chip{position:absolute;display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .6rem;border-radius:9999px;font-size:.72rem;font-weight:700;backdrop-filter:blur(6px);line-height:1}
+    .card{border-radius:1rem;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .chip{position:absolute;display:inline-flex;align-items:center;gap:.35rem;padding:.4rem .7rem;border-radius:9999px;font-size:.75rem;font-weight:700;backdrop-filter:blur(6px);line-height:1}
     .chip-outline{background:rgba(0,0,0,.55);color:#fff;border:1px solid rgba(212,175,55,.6)}
     .chip-gold{background:rgba(212,175,55,.96);color:#000}
     .chip-top-left{top:.6rem;left:.6rem}
     .chip-top-right{top:.6rem;right:.6rem}
 
-    .slide-up{opacity:0;transform:translateY(64px);filter:blur(6px);}
-    .slide-up.visible{opacity:1;transform:translateY(0);filter:blur(0);transition:opacity 1.9s ease-out,transform 1.9s cubic-bezier(.2,.8,.2,1),filter 1.9s ease-out,box-shadow .9s ease-out;}
-    @keyframes haloPulse{0%{box-shadow:0 0 0 rgba(212,175,55,0);}20%{box-shadow:0 0 48px rgba(212,175,55,.35);}100%{box-shadow:0 0 0 rgba(212,175,55,0);}}
-    .halo-on{animation:haloPulse 1.8s ease-out both;}
+    /* reveal */
+    .slide-up{opacity:0;transform:translateY(40px);filter:blur(6px);}
+    .slide-up.visible{opacity:1;transform:translateY(0);filter:blur(0);transition:opacity 1.2s ease-out,transform 1.2s cubic-bezier(.2,.8,.2,1),filter 1.2s ease-out;}
+    @keyframes haloPulse{0%{box-shadow:0 0 0 rgba(212,175,55,0);}20%{box-shadow:0 0 30px rgba(212,175,55,.25);}100%{box-shadow:0 0 0 rgba(212,175,55,0);}}
+    .halo-on{animation:haloPulse 1.2s ease-out both;}
+
+    /* reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce){
+      .sparkles, .slide-up.visible{animation: none !important; transition: none !important;}
+    }
   </style>
 </head>
 <body class="bg-coal text-white font-sans antialiased selection:bg-gold/30 selection:text-white">
-  <!-- Language + Cart -->
-  <div class="fixed top-4 right-4 z-[70] flex items-center gap-2">
-    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 shadow-lg shadow-black/40">
-      <span class="text-xs text-white/70" data-i18n="ui.languageLabel">Език</span>
-      <button id="lang-bg" class="text-xs px-2 py-1 rounded-full bg-gold text-black font-semibold">BG</button>
-      <button id="lang-en" class="text-xs px-2 py-1 rounded-full hover:bg-white/10">EN</button>
+
+  <!-- APP BAR (мобилен/десктоп) -->
+  <div class="fixed top-0 inset-x-0 z-[80]">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="mt-3 flex items-center justify-between rounded-2xl bg-black/40 backdrop-blur-md border border-white/10 px-3 py-2">
+        <!-- brand -->
+        <a href="#" class="inline-flex items-center gap-2">
+          <span class="h-2 w-2 rounded-full bg-gold shadow-[0_0_16px_rgba(212,175,55,.8)]"></span>
+          <span class="text-xs sm:text-sm tracking-widest text-white/70 uppercase">UZI Parfume</span>
+        </a>
+        <!-- controls -->
+        <div class="flex items-center gap-1 sm:gap-2">
+          <!-- language dropdown -->
+          <div class="relative">
+            <button id="langBtn" class="w-10 h-10 sm:w-9 sm:h-9 inline-flex items-center justify-center rounded-xl bg-white/10 hover:bg-white/15 border border-white/10" aria-haspopup="true" aria-expanded="false" aria-label="Език">
+              <!-- globe -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 opacity-90" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2Zm7.93 9h-3.17a15.7 15.7 0 0 0-1.2-5.11A8.02 8.02 0 0 1 19.93 11ZM12 4c.9 0 2.35 1.87 3.07 5H8.93C9.65 5.87 11.1 4 12 4ZM6.44 5.89A15.7 15.7 0 0 0 5.24 11H2.07a8.02 8.02 0 0 1 4.37-5.11ZM2.07 13h3.17c.24 1.83.78 3.6 1.57 5.11A8.02 8.02 0 0 1 2.07 13ZM12 20c-.9 0-2.35-1.87-3.07-5h6.14C14.35 18.13 12.9 20 12 20Zm3.49-1.89c.79-1.51 1.33-3.28 1.57-5.11h3.17a8.02 8.02 0 0 1-4.74 5.11Z"/></svg>
+            </button>
+            <div id="langMenu" class="hidden absolute right-0 mt-2 w-40 rounded-xl border border-white/10 bg-black/80 backdrop-blur-md p-2">
+              <div class="text-xs text-white/60 px-2 pb-1" data-i18n="ui.languageLabel">Език</div>
+              <div class="grid grid-cols-2 gap-2">
+                <button id="lang-bg" class="px-3 py-2 rounded-lg bg-gold text-black font-semibold">BG</button>
+                <button id="lang-en" class="px-3 py-2 rounded-lg hover:bg-white/10">EN</button>
+              </div>
+            </div>
+          </div>
+          <!-- cart -->
+          <button id="cartBtn" class="relative w-10 h-10 sm:w-9 sm:h-9 inline-flex items-center justify-center rounded-xl bg-gold text-black hover:bg-gold/90 shadow-lg" aria-label="Количка">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h-2l-1 2v2h2l3.6 7.59-1.35 2.45A1 1 0 0 0 9 20h10v-2H9.42l.93-1.67h6.45a1 1 0 0 0 .9-.55l3.24-6.48A1 1 0 0 0 20 7H7.21l-.94-2ZM7 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm10 0a1 1 0 1 0 .001-1.999A1 1 0 0 0 17 22Z"/></svg>
+            <span id="cartCount" class="absolute -top-1 -right-1 text-[10px] px-1.5 py-0.5 rounded-full bg-black text-gold border border-gold">0</span>
+          </button>
+        </div>
+      </div>
     </div>
-    <button id="cartBtn" class="relative inline-flex items-center gap-2 px-3 py-2 rounded-full bg-gold text-black font-semibold hover:bg-gold/90 shadow-lg shine">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h-2l-1 2v2h2l3.6 7.59-1.35 2.45A1 1 0 0 0 9 20h10v-2H9.42l.93-1.67h6.45a1 1 0 0 0 .9-.55l3.24-6.48A1 1 0 0 0 20 7H7.21l-.94-2ZM7 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm10 0a1 1 0 1 0 .001-1.999A1 1 0 0 0 17 22Z"/></svg>
-      <span data-i18n="cart.title">Количка</span>
-      <span id="cartCount" class="absolute -top-1 -right-1 text-[10px] px-1.5 py-0.5 rounded-full bg-black text-gold border border-gold">0</span>
-    </button>
   </div>
 
-  <!-- HEADER -->
-  <header class="py-10 relative">
-    <div class="mx-auto max-w-5xl px-6 text-center">
-      <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-        <span class="h-2 w-2 rounded-full bg-gold shadow-[0_0_16px_rgba(212,175,55,.8)]"></span>
-        <span class="text-xs tracking-widest text-white/70 uppercase">UZI Parfume</span>
-      </div>
-      <h1 class="mt-4 text-4xl md:text-5xl font-display gold-foil" data-i18n="header.title">
+  <!-- HEADER (pushed down by app bar) -->
+  <header class="pt-20 sm:pt-24 pb-8 sm:pb-10 relative">
+    <div class="mx-auto max-w-5xl px-5 text-center">
+      <h1 class="mt-1 text-[28px] sm:text-5xl font-display gold-foil" data-i18n="header.title">
         UZI Noir — Вдъхновение от планината
       </h1>
-      <p class="text-white/80 mt-2" data-i18n="header.subtitle">Основен и Премиум парфюм</p>
+      <p class="text-white/80 mt-2 text-sm sm:text-base" data-i18n="header.subtitle">Основен и Премиум парфюм</p>
     </div>
   </header>
 
   <!-- HERO -->
-  <section id="hero" class="relative min-h-[78vh] md:min-h-[86vh] flex items-center justify-center px-6">
+  <section id="hero" class="relative min-h-[62vh] sm:min-h-[78vh] flex items-center justify-center px-4 sm:px-6">
     <div class="hero-frame w-full max-w-6xl">
       <div class="absolute inset-0">
-        <img src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/generated-image-1-12_orig.png" alt="UZI Noir фон" class="w-full h-full object-cover opacity-25 blur-[1px]">
+        <img loading="lazy" src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/generated-image-1-12_orig.png" alt="UZI Noir фон" class="w-full h-full object-cover opacity-25 blur-[1px]">
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70"></div>
         <div class="sparkles"></div>
       </div>
 
-      <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center p-6 md:p-10">
-        <div class="text-center md:text-left fade-in">
-          <h2 class="text-4xl md:text-6xl font-display gold-foil drop-shadow mb-3">UZI Noir Parfume</h2>
-          <p class="text-white/85 text-base md:text-lg leading-relaxed mb-7" data-i18n="hero.tagline">
+      <div class="relative z-10 grid sm:grid-cols-2 gap-6 sm:gap-8 items-center p-5 sm:p-10">
+        <div class="text-center sm:text-left">
+          <h2 class="text-3xl sm:text-6xl font-display gold-foil drop-shadow mb-3">UZI Noir Parfume</h2>
+          <p class="text-white/85 text-base sm:text-lg leading-relaxed mb-6" data-i18n="hero.tagline">
             Вдъхновен от безкрайните върхове. Създаден за онези, които следват собствения си път.
           </p>
-          <div class="flex flex-wrap md:justify-start justify-center gap-3">
-            <a href="#noir" class="shine px-6 py-3 bg-gold text-black font-semibold rounded-xl hover:bg-gold/90 transition" data-i18n="hero.ctaNoir">Открий UZI Noir</a>
-            <a href="#mortality" class="shine px-6 py-3 bg-transparent border border-gold/80 text-gold font-semibold rounded-xl hover:bg-gold hover:text-black transition" data-i18n="hero.ctaMortality">Виж Mortality</a>
+          <div class="flex flex-wrap sm:justify-start justify-center gap-3">
+            <a href="#noir" class="shine px-5 py-3 bg-gold text-black font-semibold rounded-xl hover:bg-gold/90" data-i18n="hero.ctaNoir">Открий UZI Noir</a>
+            <a href="#mortality" class="shine px-5 py-3 bg-transparent border border-gold/80 text-gold font-semibold rounded-xl hover:bg-gold hover:text-black" data-i18n="hero.ctaMortality">Виж Mortality</a>
           </div>
-          <div class="mt-6 inline-flex items-center gap-3 px-3 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+          <div class="mt-5 inline-flex items-center gap-3 px-3 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
             <span class="text-xs text-white/70">Extrait &amp; Eau de Parfum</span>
             <span class="h-3 w-px bg-white/20"></span>
             <span class="text-xs text-white/70">Hand-crafted • Small batch</span>
           </div>
         </div>
 
-        <!-- Rounded promo art with feather -->
-        <div class="relative h-[380px] md:h-[460px]">
-          <figure class="promo-art feather md:rounded-[28px]">
-            <img src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/generated-image-1-12_orig.png" alt="UZI Noir — Inspired by the Mountain">
+        <!-- promo art -->
+        <div class="relative h-[300px] sm:h-[460px]">
+          <figure class="promo-art feather sm:rounded-[28px]">
+            <img loading="lazy" src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/generated-image-1-12_orig.png" alt="UZI Noir — Inspired by the Mountain">
             <figcaption class="caption" data-i18n="hero.caption">Inspired by the Mountain</figcaption>
           </figure>
         </div>
@@ -201,67 +202,66 @@
     </svg>
   </section>
 
-  <!-- ====== MAIN CONTENT (unchanged) ====== -->
-  <main class="max-w-6xl mx-auto px-6 space-y-16">
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 space-y-12 sm:space-y-16">
     <!-- NOIR -->
     <section id="noir" class="text-center">
-      <h2 class="text-2xl font-semibold mb-4" data-i18n="noir.title">UZI Noir — Основен парфюм</h2>
-      <img src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/generated-image-1-11_orig.png" alt="UZI Noir Основен парфюм" class="img-full mx-auto rounded-3xl shadow-glow mb-6">
-      <p class="max-w-3xl mx-auto text-white/80 leading-relaxed" data-i18n="noir.desc">
+      <h2 class="text-xl sm:text-2xl font-semibold mb-4" data-i18n="noir.title">UZI Noir — Основен парфюм</h2>
+      <img loading="lazy" src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/generated-image-1-11_orig.png" alt="UZI Noir Основен парфюм" class="img-full mx-auto rounded-2xl sm:rounded-3xl shadow-glow mb-5 sm:mb-6">
+      <p class="max-w-3xl mx-auto text-white/80 leading-relaxed text-[15px] sm:text-base" data-i18n="noir.desc">
         Основният <span class="text-gold">UZI Noir</span> е вдъхновен от чистия въздух на високите върхове и от усещането за свобода сред природата. Той комбинира свежи и дървесни акорди, които се разгръщат в балансиран и елегантен аромат, подходящ за всеки ден. Подчертава силата, самоувереността и връзката с планината.
       </p>
-      <div class="mt-6 max-w-2xl mx-auto bg-white/5 ring-1 ring-white/10 rounded-2xl p-6">
-        <h3 class="text-xl font-semibold text-gold mb-2" data-i18n="noir.pyramid">Ароматна пирамида</h3>
-        <p class="text-white/80" data-i18n="noir.top"><strong>Връхни нотки:</strong> бергамот, лавандула, цитрус</p>
-        <p class="text-white/80 mt-1" data-i18n="noir.heart"><strong>Сърце:</strong> мускус, зелени треви, здравец</p>
-        <p class="text-white/80 mt-1" data-i18n="noir.base"><strong>База:</strong> кедър, ветивер, амбра</p>
+      <div class="mt-5 max-w-2xl mx-auto bg-white/5 ring-1 ring-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-6 text-left sm:text-center">
+        <h3 class="text-lg sm:text-xl font-semibold text-gold mb-2" data-i18n="noir.pyramid">Ароматна пирамида</h3>
+        <p class="text-white/80 text-sm sm:text-base" data-i18n="noir.top"><strong>Връхни нотки:</strong> бергамот, лавандула, цитрус</p>
+        <p class="text-white/80 text-sm sm:text-base mt-1" data-i18n="noir.heart"><strong>Сърце:</strong> мускус, зелени треви, здравец</p>
+        <p class="text-white/80 text-sm sm:text-base mt-1" data-i18n="noir.base"><strong>База:</strong> кедър, ветивер, амбра</p>
       </div>
-      <p class="mt-4 text-gold font-medium" data-i18n="noir.meta">Категория: Унисекс | Концентрация: Eau de Parfum | Подходящ за всеки сезон</p>
-      <button data-product="UZI Noir — Основен парфюм" class="openPopup mt-6 px-6 py-3 bg-gold text-black font-semibold rounded-xl hover:bg-gold/90" data-i18n="form.open">Запитване за този продукт</button>
+      <p class="mt-3 sm:mt-4 text-gold font-medium text-sm sm:text-base" data-i18n="noir.meta">Категория: Унисекс | Концентрация: Eau de Parfum | Подходящ за всеки сезон</p>
+      <button data-product="UZI Noir — Основен парфюм" class="openPopup mt-5 sm:mt-6 w-full sm:w-auto px-5 py-3 bg-gold text-black font-semibold rounded-xl hover:bg-gold/90" data-i18n="form.open">Запитване за този продукт</button>
     </section>
 
     <!-- MORTALITY -->
     <section id="mortality" class="text-center">
-      <h2 class="text-2xl font-semibold mb-4" data-i18n="mort.title">UZI Mortality — Премиум парфюм</h2>
-      <img src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/generated-image-1-14_orig.png" alt="UZI Mortality Премиум парфюм" class="img-full mx-auto rounded-3xl shadow-glow mb-6">
-      <p class="max-w-3xl mx-auto text-white/80 leading-relaxed" data-i18n="mort.desc">
+      <h2 class="text-xl sm:text-2xl font-semibold mb-4" data-i18n="mort.title">UZI Mortality — Премиум парфюм</h2>
+      <img loading="lazy" src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/generated-image-1-14_orig.png" alt="UZI Mortality Премиум парфюм" class="img-full mx-auto rounded-2xl sm:rounded-3xl shadow-glow mb-5 sm:mb-6">
+      <p class="max-w-3xl mx-auto text-white/80 leading-relaxed text-[15px] sm:text-base" data-i18n="mort.desc">
         <span class="text-gold">UZI Mortality Premium</span> е луксозната интерпретация на аромата — по-дълбок, наситен и мистериозен. Той разкрива мъжкарски, но и артистичен характер, носещ усещане за сила и спокойствие. Създаден е за хора, които ценят индивидуалността, страстта и харизмата.
       </p>
-      <div class="mt-6 max-w-2xl mx-auto bg-white/5 ring-1 ring-white/10 rounded-2xl p-6">
-        <h3 class="text-xl font-semibold text-gold mb-2" data-i18n="mort.pyramid">Ароматна пирамида</h3>
-        <p class="text-white/80" data-i18n="mort.top"><strong>Връхни нотки:</strong> бор, хвойна</p>
-        <p class="text-white/80 mt-1" data-i18n="mort.heart"><strong>Сърце:</strong> тамян, кожа</p>
-        <p class="text-white/80 mt-1" data-i18n="mort.base"><strong>База:</strong> ветивер, черен дъб, смола</p>
+      <div class="mt-5 max-w-2xl mx-auto bg-white/5 ring-1 ring-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-6 text-left sm:text-center">
+        <h3 class="text-lg sm:text-xl font-semibold text-gold mb-2" data-i18n="mort.pyramid">Ароматна пирамида</h3>
+        <p class="text-white/80 text-sm sm:text-base" data-i18n="mort.top"><strong>Връхни нотки:</strong> бор, хвойна</p>
+        <p class="text-white/80 text-sm sm:text-base mt-1" data-i18n="mort.heart"><strong>Сърце:</strong> тамян, кожа</p>
+        <p class="text-white/80 text-sm sm:text-base mt-1" data-i18n="mort.base"><strong>База:</strong> ветивер, черен дъб, смола</p>
       </div>
-      <p class="mt-4 text-gold font-medium" data-i18n="mort.meta">Категория: Унисекс | Концентрация: Extrait de Parfum | Дълготрайност: 10+ часа</p>
-      <button data-product="UZI Mortality — Премиум парфюм" class="openPopup mt-6 px-6 py-3 bg-gold text-black font-semibold rounded-xl hover:bg-gold/90" data-i18n="form.open">Запитване за този продукт</button>
+      <p class="mt-3 sm:mt-4 text-gold font-medium text-sm sm:text-base" data-i18n="mort.meta">Категория: Унисекс | Концентрация: Extrait de Parfum | Дълготрайност: 10+ часа</p>
+      <button data-product="UZI Mortality — Премиум парфюм" class="openPopup mt-5 sm:mt-6 w-full sm:w-auto px-5 py-3 bg-gold text-black font-semibold rounded-xl hover:bg-gold/90" data-i18n="form.open">Запитване за този продукт</button>
     </section>
 
     <!-- 🛒 SHOP -->
     <section id="shop" class="relative">
-      <h2 class="text-center text-3xl font-display text-gold mb-6" data-i18n="shop.title">Магазин</h2>
-      <p class="text-center text-white/70 mb-8" data-i18n="shop.note">Цените са крайни (с ДДС). Плащането и доставката се уточняват по имейл след запитване.</p>
+      <h2 class="text-center text-2xl sm:text-3xl font-display text-gold mb-5 sm:mb-6" data-i18n="shop.title">Магазин</h2>
+      <p class="text-center text-white/70 text-sm sm:text-base mb-6 sm:mb-8" data-i18n="shop.note">Цените са крайни (с ДДС). Плащането и доставката се уточняват по имейл след запитване.</p>
 
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid sm:grid-cols-2 gap-5 sm:gap-6">
         <!-- UZI Noir -->
         <article class="card relative ring-1 ring-white/10 bg-white/5">
           <div class="media-luxe">
             <span class="chip chip-outline chip-top-left" data-i18n="badge.parfum">Парфюм</span>
             <span class="chip chip-gold chip-top-right" data-i18n="badge.noirPromo">Промоция 82 лв.</span>
-            <img src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/49a8c4c8-5b69-457a-ba99-1f4717f48649_orig.jpg" alt="UZI Noir — Продуктова карта">
+            <img loading="lazy" src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/49a8c4c8-5b69-457a-ba99-1f4717f48649_orig.jpg" alt="UZI Noir — Продуктова карта">
           </div>
-          <div class="p-5 -mt-3 space-y-2 bg-gradient-to-b from-transparent to-black/10">
-            <h3 class="text-lg font-semibold">UZI Noir</h3>
-            <div class="text-xs text-white/70" data-i18n="shop.vatIncluded">Крайна цена (с ДДС)</div>
+          <div class="p-4 sm:p-5 -mt-2 sm:-mt-3 space-y-2 bg-gradient-to-b from-transparent to-black/10">
+            <h3 class="text-base sm:text-lg font-semibold">UZI Noir</h3>
+            <div class="text-[11px] sm:text-xs text-white/70" data-i18n="shop.vatIncluded">Крайна цена (с ДДС)</div>
             <div class="flex items-baseline gap-2">
-              <span class="text-2xl font-bold"><span data-price="noir-bgn">82.00</span> <span class="text-sm font-medium">BGN</span></span>
-              <span class="text-white/60">≈</span>
-              <span class="text-base"><span data-price="noir-eur">41.95</span> EUR</span>
+              <span class="text-xl sm:text-2xl font-bold"><span data-price="noir-bgn">82.00</span> <span class="text-xs sm:text-sm font-medium">BGN</span></span>
+              <span class="text-white/60 hidden sm:inline">≈</span>
+              <span class="text-sm sm:text-base"><span data-price="noir-eur">41.95</span> EUR</span>
             </div>
             <div class="flex items-center gap-2 pt-2">
               <label class="text-sm text-white/80" data-i18n="shop.qty">Брой:</label>
-              <input id="qty-noir" type="number" min="1" max="10" value="1" class="w-20 px-3 py-2 rounded-xl bg-white/10 ring-1 ring-white/20 focus:ring-gold outline-none">
-              <button class="addToCart ml-auto px-4 py-2 rounded-xl bg-gold text-black font-semibold hover:bg-gold/90"
+              <input id="qty-noir" type="number" min="1" max="10" value="1" class="w-24 px-3 py-2 rounded-xl bg-white/10 ring-1 ring-white/20 focus:ring-gold outline-none">
+              <button class="addToCart ml-auto px-4 py-3 rounded-xl bg-gold text-black font-semibold hover:bg-gold/90"
                       data-id="noir" data-name="UZI Noir" data-type="Парфюм" data-pricebgn="82" data-i18n="shop.add">Добави</button>
             </div>
           </div>
@@ -272,20 +272,20 @@
           <div class="media-luxe">
             <span class="chip chip-outline chip-top-left" data-i18n="badge.extrait">Екстракт</span>
             <span class="chip chip-gold chip-top-right">311 лв.</span>
-            <img src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/screenshot-20251023-112735-chrome_orig.jpg" alt="UZI Mortality — Продуктова карта">
+            <img loading="lazy" src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/screenshot-20251023-112735-chrome_orig.jpg" alt="UZI Mortality — Продуктова карта">
           </div>
-          <div class="p-5 -mt-3 space-y-2 bg-gradient-to-b from-transparent to-black/10">
-            <h3 class="text-lg font-semibold">UZI Mortality</h3>
-            <div class="text-xs text-white/70" data-i18n="shop.vatIncluded">Крайна цена (с ДДС)</div>
+          <div class="p-4 sm:p-5 -mt-2 sm:-mt-3 space-y-2 bg-gradient-to-b from-transparent to-black/10">
+            <h3 class="text-base sm:text-lg font-semibold">UZI Mortality</h3>
+            <div class="text-[11px] sm:text-xs text-white/70" data-i18n="shop.vatIncluded">Крайна цена (с ДДС)</div>
             <div class="flex items-baseline gap-2">
-              <span class="text-2xl font-bold"><span data-price="mort-bgn">311.00</span> <span class="text-sm font-medium">BGN</span></span>
-              <span class="text-white/60">≈</span>
-              <span class="text-base"><span data-price="mort-eur">159.05</span> EUR</span>
+              <span class="text-xl sm:text-2xl font-bold"><span data-price="mort-bgn">311.00</span> <span class="text-xs sm:text-sm font-medium">BGN</span></span>
+              <span class="text-white/60 hidden sm:inline">≈</span>
+              <span class="text-sm sm:text-base"><span data-price="mort-eur">159.05</span> EUR</span>
             </div>
             <div class="flex items-center gap-2 pt-2">
               <label class="text-sm text-white/80" data-i18n="shop.qty">Брой:</label>
-              <input id="qty-mort" type="number" min="1" max="10" value="1" class="w-20 px-3 py-2 rounded-xl bg-white/10 ring-1 ring-white/20 focus:ring-gold outline-none">
-              <button class="addToCart ml-auto px-4 py-2 rounded-xl bg-gold text-black font-semibold hover:bg-gold/90"
+              <input id="qty-mort" type="number" min="1" max="10" value="1" class="w-24 px-3 py-2 rounded-xl bg-white/10 ring-1 ring-white/20 focus:ring-gold outline-none">
+              <button class="addToCart ml-auto px-4 py-3 rounded-xl bg-gold text-black font-semibold hover:bg-gold/90"
                       data-id="mort" data-name="UZI Mortality" data-type="Екстракт" data-pricebgn="311" data-i18n="shop.add">Добави</button>
             </div>
           </div>
@@ -295,16 +295,16 @@
       <div class="mt-6 flex items-center justify-center gap-3 text-sm text-white/70">
         <span class="inline-flex items-center gap-2">
           <input id="currencyToggle" type="checkbox" class="accent-gold">
-          <label for="currencyToggle" data-i18n="shop.showEur">Показвай и цена в EUR (1 EUR = 1.95583 BGN)</label>
+          <label for="currencyToggle" class="text-xs sm:text-sm" data-i18n="shop.showEur">Показвай и цена в EUR (1 EUR = 1.95583 BGN)</label>
         </span>
       </div>
     </section>
   </main>
 
   <!-- Pop-up форма за запитване (FormSubmit) -->
-  <div id="popup" class="hidden fixed inset-0 flex items-center justify-center popup-bg z-50">
-    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 max-w-md w-full ring-1 ring-white/20">
-      <h3 class="text-2xl font-semibold text-gold mb-4 text-center" data-i18n="form.title">Изпрати запитване</h3>
+  <div id="popup" class="hidden fixed inset-0 flex items-center justify-center bg-black/70 z-[90]">
+    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 sm:p-6 max-w-md w-[92%] sm:w-full ring-1 ring-white/20">
+      <h3 class="text-xl sm:text-2xl font-semibold text-gold mb-3 sm:mb-4 text-center" data-i18n="form.title">Изпрати запитване</h3>
       <form id="inquiryForm" class="space-y-3" method="POST"
             action="https://formsubmit.co/uzunov.angel@abv.bg" accept-charset="UTF-8">
         <input type="text" name="_honey" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
@@ -317,25 +317,25 @@
 
         <label class="block text-sm text-white/80"><span data-i18n="form.name">Име</span>
           <input id="name" name="name" type="text" required
-                 class="mt-1 w-full px-4 py-2 rounded-lg bg-white/10 ring-1 ring-white/20 focus:ring-gold outline-none"
+                 class="mt-1 w-full px-4 py-3 rounded-lg bg-white/10 ring-1 ring-white/20 focus:ring-gold outline-none"
                  autocomplete="name" data-i18n-placeholder="form.namePh" placeholder="Вашето име">
         </label>
 
         <label class="block text-sm text-white/80"><span data-i18n="form.email">Имейл</span>
           <input id="email" name="email" type="email" required
-                 class="mt-1 w-full px-4 py-2 rounded-lg bg-white/10 ring-1 ring-white/20 focus:ring-gold outline-none"
+                 class="mt-1 w-full px-4 py-3 rounded-lg bg-white/10 ring-1 ring-white/20 focus:ring-gold outline-none"
                  autocomplete="email" data-i18n-placeholder="form.emailPh" placeholder="name@example.com">
         </label>
 
         <label class="block text-sm text-white/80"><span data-i18n="form.phone">Телефон</span>
           <input id="phone" name="phone" type="text"
-                 class="mt-1 w-full px-4 py-2 rounded-lg bg-white/10 ring-1 ring-white/20 focus:ring-gold outline-none"
+                 class="mt-1 w-full px-4 py-3 rounded-lg bg-white/10 ring-1 ring-white/20 focus:ring-gold outline-none"
                  autocomplete="tel" data-i18n-placeholder="form.phonePh" placeholder="+359...">
         </label>
 
         <label class="block text-sm text-white/80"><span data-i18n="form.message">Съобщение</span>
           <textarea id="message" name="message" rows="4" required
-                    class="mt-1 w-full px-4 py-2 rounded-lg bg-white/10 ring-1 ring-white/20 focus:ring-gold outline-none"
+                    class="mt-1 w-full px-4 py-3 rounded-lg bg-white/10 ring-1 ring-white/20 focus:ring-gold outline-none"
                     data-i18n-placeholder="form.messagePh" placeholder="Как мога да помогна?"></textarea>
         </label>
 
@@ -345,8 +345,8 @@
         </label>
 
         <div class="grid grid-cols-2 gap-2">
-          <button type="submit" class="px-4 py-2 rounded-lg bg-gold text-black font-semibold hover:bg-gold/90" data-i18n="form.submit">Изпрати</button>
-          <button id="closePopup" type="button" class="px-4 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20" data-i18n="form.close">Затвори</button>
+          <button type="submit" class="px-4 py-3 rounded-lg bg-gold text-black font-semibold hover:bg-gold/90" data-i18n="form.submit">Изпрати</button>
+          <button id="closePopup" type="button" class="px-4 py-3 rounded-lg bg-white/10 text-white hover:bg-white/20" data-i18n="form.close">Затвори</button>
         </div>
       </form>
       <p id="successMsg" class="hidden text-green-400 text-center mt-3" data-i18n="form.success">Благодарим! Изпратихме вашето запитване.</p>
@@ -355,10 +355,10 @@
   </div>
 
   <!-- Cart Drawer -->
-  <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-[100%] sm:w-[420px] bg-black/80 backdrop-blur-lg ring-1 ring-white/10 translate-x-full transition-transform z-[60] flex flex-col">
+  <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-black/80 backdrop-blur-lg ring-1 ring-white/10 translate-x-full transition-transform z-[95] flex flex-col">
     <div class="p-4 border-b border-white/10 flex items-center justify-between">
-      <h3 class="text-xl font-semibold" data-i18n="cart.title">Количка</h3>
-      <button id="closeCart" class="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20">✕</button>
+      <h3 class="text-lg sm:text-xl font-semibold" data-i18n="cart.title">Количка</h3>
+      <button id="closeCart" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20">✕</button>
     </div>
     <div class="p-4 flex items-center justify-between text-sm text-white/70">
       <label class="inline-flex items-center gap-2">
@@ -376,7 +376,7 @@
           <div id="totalEURwrap" class="text-sm text-white/60 hidden">≈ <span id="totalEUR">0.00</span> EUR</div>
         </div>
       </div>
-      <button id="checkoutBtn" class="w-full mt-2 px-4 py-2 rounded-lg bg-gold text-black font-semibold hover:bg-gold/90" data-i18n="cart.checkout">Завърши запитване</button>
+      <button id="checkoutBtn" class="w-full mt-2 px-4 py-3 rounded-lg bg-gold text-black font-semibold hover:bg-gold/90" data-i18n="cart.checkout">Завърши запитване</button>
       <p class="text-xs text-white/60" data-i18n="cart.legal">Това не е фактура. Финализирането на поръчката става след потвърждение по имейл.</p>
     </div>
   </aside>
@@ -389,13 +389,19 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Language dropdown
+    const langBtn  = document.getElementById('langBtn');
+    const langMenu = document.getElementById('langMenu');
+    function toggleLangMenu(){ langMenu.classList.toggle('hidden'); langBtn.setAttribute('aria-expanded', langMenu.classList.contains('hidden') ? 'false' : 'true'); }
+    langBtn.addEventListener('click', (e)=>{ e.stopPropagation(); toggleLangMenu(); });
+    document.addEventListener('click', (e)=>{ if(!langMenu.contains(e.target)) langMenu.classList.add('hidden'); });
+
     // Popup controls
     const popup = document.getElementById('popup');
     const productField = document.getElementById('productField');
     const messageField = document.getElementById('message');
     const successMsg = document.getElementById('successMsg');
     const errorMsg = document.getElementById('errorMsg');
-
     document.querySelectorAll('.openPopup').forEach(btn=>{
       btn.addEventListener('click', () => {
         productField.value = btn.dataset.product || '';
@@ -433,9 +439,9 @@
               <div class="text-sm text-white/70">${it.qty} × ${fmt(it.priceBGN)} BGN<span class="${eurSwitch.checked?'':'hidden'}"> ≈ ${fmt(it.priceBGN/EUR_RATE)} EUR</span></div>
             </div>
             <div class="flex items-center gap-2">
-              <button class="px-2 py-1 bg-white/10 rounded" data-act="dec" data-idx="${idx}">−</button>
-              <button class="px-2 py-1 bg-white/10 rounded" data-act="inc" data-idx="${idx}">+</button>
-              <button class="px-2 py-1 bg-white/10 rounded" data-act="del" data-idx="${idx}">✕</button>
+              <button class="px-3 py-2 bg-white/10 rounded" data-act="dec" data-idx="${idx}">−</button>
+              <button class="px-3 py-2 bg-white/10 rounded" data-act="inc" data-idx="${idx}">+</button>
+              <button class="px-3 py-2 bg-white/10 rounded" data-act="del" data-idx="${idx}">✕</button>
             </div>
           </div>
         `).join('');
@@ -445,7 +451,6 @@
       totalEUR.textContent = fmt(total / EUR_RATE);
       cartCount.textContent = cart.reduce((s,it)=> s + it.qty, 0);
       totalEURwrap.classList.toggle('hidden', !eurSwitch.checked);
-      // re-apply i18n to dynamic nodes
       applyI18n(currentLang, true);
     }
 
@@ -664,19 +669,20 @@
         subjectHidden.value = (currentLang==='bg') ? 'Ново запитване от сайта UZI Noir' : 'New inquiry from UZI Noir website';
       }
 
+      // highlight current
       if (locale === 'bg') {
-        langBG.classList.add('bg-gold','text-black','font-semibold');
-        langEN.classList.remove('bg-gold','text-black','font-semibold');
+        langBG?.classList.add('bg-gold','text-black','font-semibold');
+        langEN?.classList.remove('bg-gold','text-black','font-semibold');
       } else {
-        langEN.classList.add('bg-gold','text-black','font-semibold');
-        langBG.classList.remove('bg-gold','text-black','font-semibold');
+        langEN?.classList.add('bg-gold','text-black','font-semibold');
+        langBG?.classList.remove('bg-gold','text-black','font-semibold');
       }
 
       if (!skipScrollFix) setTimeout(()=>{},0);
     }
 
-    langBG.addEventListener('click', ()=> applyI18n('bg'));
-    langEN.addEventListener('click', ()=> applyI18n('en'));
+    langBG?.addEventListener('click', ()=> { applyI18n('bg'); langMenu.classList.add('hidden'); });
+    langEN?.addEventListener('click', ()=> { applyI18n('en'); langMenu.classList.add('hidden'); });
     const stored = localStorage.getItem('uzi_lang');
     const preferred = stored ? stored : ((navigator.language||'bg').toLowerCase().startsWith('en') ? 'en' : 'bg');
     applyI18n(preferred);
@@ -687,8 +693,10 @@
       errorMsg.classList.add('hidden');
     });
 
-    /* 🔎 Zoom inside product card images */
+    /* 🔎 Hover zoom (disabled on touch by CSS). */
     (function hoverZoomInsideCard(){
+      const isHoverable = matchMedia('(hover:hover) and (pointer:fine)').matches;
+      if(!isHoverable) return;
       const ZOOM = 4;
       document.querySelectorAll('.media-luxe').forEach(wrap=>{
         const img = wrap.querySelector('img'); if(!img) return;
@@ -719,9 +727,6 @@
         wrap.addEventListener('mouseenter', enter);
         wrap.addEventListener('mousemove', move);
         wrap.addEventListener('mouseleave', leave);
-        wrap.addEventListener('touchstart', enter, {passive:true});
-        wrap.addEventListener('touchmove', move, {passive:true});
-        wrap.addEventListener('touchend', leave);
         window.addEventListener('resize', ()=>{ rect = wrap.getBoundingClientRect(); });
       });
     })();
@@ -734,7 +739,7 @@
           if(entry.isIntersecting){
             const el = entry.target;
             el.classList.add('visible','halo-on');
-            setTimeout(()=> el.classList.remove('halo-on'), 1800);
+            setTimeout(()=> el.classList.remove('halo-on'), 1200);
             ob.unobserve(el);
           }
         });
@@ -742,11 +747,11 @@
       els.forEach(el=>{ el.classList.add('slide-up'); ob.observe(el); });
     })();
 
-    /* 🪄 HERO parallax for bottle (subtle) */
+    /* 🪄 HERO parallax (subtle) */
     (function heroParallax(){
       const img = document.querySelector('#hero .hero-parallax');
       if(!img) return;
-      const max = 10; // px
+      const max = 10;
       function onMove(e){
         const rect = img.getBoundingClientRect();
         const cx = (e.clientX ?? (e.touches?.[0]?.clientX) ?? 0) - rect.left;
@@ -756,8 +761,7 @@
         img.style.transform = `translate3d(${(-dx*max).toFixed(1)}px, ${(-dy*max).toFixed(1)}px, 0)`;
       }
       const area = document.getElementById('hero');
-      area.addEventListener('mousemove', onMove);
-      area.addEventListener('touchmove', onMove, {passive:true});
+      area.addEventListener('mousemove', onMove, {passive:true});
       area.addEventListener('mouseleave', ()=> img.style.transform = 'translate3d(0,0,0)');
     })();
   </script>

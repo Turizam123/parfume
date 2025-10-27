@@ -6,11 +6,7 @@
   <title>UZI Noir — Вдъхновение от планината</title>
   <meta name="description" content="UZI Noir — дизайнерски парфюм, вдъхновен от планините. Основен и премиум вариант с елегантен дизайн, уникален аромат и премиум усещане." />
   <meta name="theme-color" content="#0b0b0b" />
-  <figure class="promo-art feather sm:rounded-[28px]">
-  <img loading="lazy"
-       src="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/generated-image-1-17_orig.png"
-       alt="UZI Noir — Product">
-</figure>
+  <meta property="og:image" content="https://turistibg.weebly.com/uploads/1/0/3/2/10320234/generated-image-1-17_orig.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/x-icon" href="favicon_uzi_noir.ico">
   <script>
@@ -700,49 +696,39 @@
 
     /* 🔎 Hover zoom (disabled on touch by CSS). */
     (function hoverZoomInsideCard(){
-  const ZOOM = 4;
-  document.querySelectorAll('.media-luxe').forEach(wrap=>{
-    const img = wrap.querySelector('img'); if(!img) return;
-    let rect;
-
-    function setOrigin(clientX, clientY){
-      rect = wrap.getBoundingClientRect();
-      const x = ((clientX - rect.left) / rect.width) * 100;
-      const y = ((clientY - rect.top)  / rect.height) * 100;
-      img.style.transformOrigin = `${x}% ${y}%`;
-    }
-    function enter(e){
-      wrap.classList.add('zooming');
-      const cx = (e.touches?.[0]?.clientX) ?? e.clientX;
-      const cy = (e.touches?.[0]?.clientY) ?? e.clientY;
-      setOrigin(cx, cy);
-      img.style.transform = `scale(${ZOOM})`;
-    }
-    function move(e){
-      if(!wrap.classList.contains('zooming')) return;
-      const cx = (e.touches?.[0]?.clientX) ?? e.clientX;
-      const cy = (e.touches?.[0]?.clientY) ?? e.clientY;
-      setOrigin(cx, cy);
-      // предотвратява вертикално скролиране докато „плъзгаме“ при зум
-      if (e.touches) e.preventDefault();
-    }
-    function leave(){
-      wrap.classList.remove('zooming');
-      img.style.transform = 'scale(1)';
-    }
-
-    // Десктоп (hover)
-    wrap.addEventListener('mouseenter', enter);
-    wrap.addEventListener('mousemove',  move);
-    wrap.addEventListener('mouseleave', leave);
-
-    // Мобилни (tap & drag)
-    wrap.addEventListener('touchstart', enter, {passive:true});
-    wrap.addEventListener('touchmove',  move,  {passive:false});
-    wrap.addEventListener('touchend',   leave, {passive:true});
-
-    // Ресайз
-    window.addEventListener('resize', ()=>{ rect = wrap.getBoundingClientRect(); });
+      const isHoverable = matchMedia('(hover:hover) and (pointer:fine)').matches;
+      if(!isHoverable) return;
+      const ZOOM = 4;
+      document.querySelectorAll('.media-luxe').forEach(wrap=>{
+        const img = wrap.querySelector('img'); if(!img) return;
+        let rect;
+        function setOrigin(clientX, clientY){
+          rect = wrap.getBoundingClientRect();
+          const x = ((clientX - rect.left) / rect.width) * 100;
+          const y = ((clientY - rect.top) / rect.height) * 100;
+          img.style.transformOrigin = `${x}% ${y}%`;
+        }
+        function enter(e){
+          wrap.classList.add('zooming');
+          const cx = (e.touches?.[0]?.clientX) ?? e.clientX;
+          const cy = (e.touches?.[0]?.clientY) ?? e.clientY;
+          setOrigin(cx, cy);
+          img.style.transform = `scale(${ZOOM})`;
+        }
+        function move(e){
+          if(!wrap.classList.contains('zooming')) return;
+          const cx = (e.touches?.[0]?.clientX) ?? e.clientX;
+          const cy = (e.touches?.[0]?.clientY) ?? e.clientY;
+          setOrigin(cx, cy);
+        }
+        function leave(){
+          wrap.classList.remove('zooming');
+          img.style.transform = 'scale(1)';
+        }
+        wrap.addEventListener('mouseenter', enter);
+        wrap.addEventListener('mousemove', move);
+        wrap.addEventListener('mouseleave', leave);
+        window.addEventListener('resize', ()=>{ rect = wrap.getBoundingClientRect(); });
       });
     })();
 
